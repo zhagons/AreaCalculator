@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,66 +10,58 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Microsoft YaHei', sans-serif;
         }
-
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: #333;
         }
-
         .container {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             overflow: hidden;
         }
-
         header {
-            background: #4a6bdf;
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
             color: white;
             padding: 25px 30px;
             text-align: center;
         }
-
         h1 {
             font-size: 28px;
             margin-bottom: 10px;
         }
-
         .subtitle {
             font-size: 16px;
             opacity: 0.9;
         }
-
         .content {
-            padding: 30px;
+            padding: 25px;
         }
-
         .building-input {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 30px;
         }
-
         .floor-card {
             flex: 1;
-            min-width: 250px;
+            min-width: 280px;
             background: #f8f9fa;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-
         .floor-title {
-            color: #4a6bdf;
+            color: #2e7d32;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #eaeaea;
@@ -78,18 +69,15 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .input-group {
             margin-bottom: 15px;
         }
-
         label {
             display: block;
             margin-bottom: 8px;
             color: #555;
             font-weight: 500;
         }
-
         input {
             width: 100%;
             padding: 12px;
@@ -97,7 +85,6 @@
             border-radius: 6px;
             font-size: 16px;
         }
-
         .area-display {
             background: #e8f4ff;
             padding: 12px;
@@ -106,56 +93,93 @@
             text-align: center;
             margin-top: 10px;
         }
-
+        
+        /* 额外面积样式 */
+        .extra-area-section {
+            background: #fff3e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #ff9800;
+        }
+        .extra-area-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .add-extra-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .extra-area-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #fff8e1;
+            border-radius: 8px;
+            align-items: center;
+        }
+        .extra-area-item input {
+            flex: 1;
+        }
+        .remove-extra-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
         .results {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 25px;
             margin-top: 20px;
         }
-
         .result-item {
             display: flex;
             justify-content: space-between;
             padding: 15px 0;
             border-bottom: 1px solid #eaeaea;
         }
-
         .result-item:last-child {
             border-bottom: none;
         }
-
         .total-area {
             font-size: 24px;
             font-weight: bold;
-            color: #4a6bdf;
+            color: #2e7d32;
             text-align: center;
             margin-top: 20px;
             padding: 20px;
             background: #e8f4ff;
             border-radius: 10px;
         }
-
         .calculation-process {
             margin-top: 30px;
             padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
         }
-
         .process-step {
             margin-bottom: 15px;
             padding-left: 20px;
             position: relative;
         }
-
         .process-step:before {
             content: "•";
             position: absolute;
             left: 0;
-            color: #4a6bdf;
+            color: #2e7d32;
         }
-
         footer {
             text-align: center;
             padding: 20px;
@@ -163,26 +187,26 @@
             font-size: 14px;
             border-top: 1px solid #eaeaea;
         }
-
+        
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .content {
-                padding: 0;
-            }
-
             .building-input {
                 flex-direction: column;
+            }
+            .extra-area-item {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <header>
             <h1>建筑面积计算器</h1>
-            <div class="subtitle">快速计算各楼层面积与总面积</div>
+            <div class="subtitle">支持额外宽高面积计算</div>
         </header>
-
+        
         <div class="content">
             <div class="building-input">
                 <div class="floor-card">
@@ -191,52 +215,63 @@
                     </div>
                     <div class="input-group">
                         <label for="floor1-width">面宽 (米)</label>
-                        <input type="number" id="floor1-width" value="12.4" step="0.1">
+                        <input type="number" id="floor1-width" value="12.4" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="input-group">
                         <label for="floor1-depth">进深 (米)</label>
-                        <input type="number" id="floor1-depth" value="13.0" step="0.1">
+                        <input type="number" id="floor1-depth" value="13.0" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="area-display">
                         面积: <span id="floor1-area">161.20</span> 平方米
                     </div>
                 </div>
-
+                
                 <div class="floor-card">
                     <div class="floor-title">
                         <span>二楼</span>
                     </div>
                     <div class="input-group">
                         <label for="floor2-width">面宽 (米)</label>
-                        <input type="number" id="floor2-width" value="12.4" step="0.1">
+                        <input type="number" id="floor2-width" value="12.4" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="input-group">
                         <label for="floor2-depth">进深 (米)</label>
-                        <input type="number" id="floor2-depth" value="9.5" step="0.1">
+                        <input type="number" id="floor2-depth" value="9.5" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="area-display">
                         面积: <span id="floor2-area">117.80</span> 平方米
                     </div>
                 </div>
-
+                
                 <div class="floor-card">
                     <div class="floor-title">
                         <span>三楼</span>
                     </div>
                     <div class="input-group">
                         <label for="floor3-width">面宽 (米)</label>
-                        <input type="number" id="floor3-width" value="12.4" step="0.1">
+                        <input type="number" id="floor3-width" value="12.4" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="input-group">
                         <label for="floor3-depth">进深 (米)</label>
-                        <input type="number" id="floor3-depth" value="9.5" step="0.1">
+                        <input type="number" id="floor3-depth" value="9.5" step="0.1" oninput="calculateAreas()">
                     </div>
                     <div class="area-display">
                         面积: <span id="floor3-area">117.80</span> 平方米
                     </div>
                 </div>
             </div>
-
+            
+            <!-- 额外面积区域 -->
+            <div class="extra-area-section">
+                <div class="extra-area-header">
+                    <h2>额外面积</h2>
+                    <button class="add-extra-btn" onclick="addExtraArea()">+ 添加额外面积</button>
+                </div>
+                <div id="extra-areas-container">
+                    <!-- 额外面积项目将在这里动态添加 -->
+                </div>
+            </div>
+            
             <div class="results">
                 <h2>计算结果</h2>
                 <div class="result-item">
@@ -251,39 +286,85 @@
                     <span>三楼面积:</span>
                     <span id="result-floor3">117.80 平方米</span>
                 </div>
-
+                <div class="result-item">
+                    <span>额外面积:</span>
+                    <span id="result-extra">0.00 平方米</span>
+                </div>
+                
                 <div class="total-area">
                     总建筑面积: <span id="total-area">396.80</span> 平方米
                 </div>
             </div>
-
+            
             <div class="calculation-process">
                 <h2>计算过程</h2>
                 <div class="process-step">一楼面积 = 面宽 × 进深 = 12.4 × 13.0 = 161.20 平方米</div>
                 <div class="process-step">二楼面积 = 面宽 × 进深 = 12.4 × 9.5 = 117.80 平方米</div>
                 <div class="process-step">三楼面积 = 面宽 × 进深 = 12.4 × 9.5 = 117.80 平方米</div>
-                <div class="process-step">总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 = 161.20 + 117.80 + 117.80 = 396.80 平方米</div>
+                <div class="process-step">额外面积 = 0.00 平方米</div>
+                <div class="process-step">总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 + 额外面积 = 161.20 + 117.80 + 117.80 + 0.00 = 396.80 平方米</div>
             </div>
         </div>
-
+        
         <footer>
-            <p>建筑面积计算器 &copy; 2025 | 精确计算建筑各层面积</p>
+            <p>建筑面积计算器 &copy; 2025 | 精确计算建筑各层面积及额外面积</p>
         </footer>
     </div>
 
     <script>
-        // 获取所有输入元素
-        const inputs = document.querySelectorAll('input');
-
-        // 为所有输入框添加事件监听
-        inputs.forEach(input => {
-            input.addEventListener('input', calculateAreas);
-        });
-
-        // 初始计算
-        calculateAreas();
-
-        // 计算面积函数
+        // 存储额外面积项目
+        let extraAreas = [];
+        
+        // 添加额外面积项目
+        function addExtraArea() {
+            const id = Date.now(); // 使用时间戳作为唯一ID
+            extraAreas.push({ id, width: 0, depth: 0, area: 0 });
+            
+            const container = document.getElementById('extra-areas-container');
+            const extraItem = document.createElement('div');
+            extraItem.className = 'extra-area-item';
+            extraItem.innerHTML = `
+                <input type="text" placeholder="区域描述（如：阳台、露台等）" oninput="updateExtraDescription(${id}, this.value)">
+                <input type="number" placeholder="宽度 (米)" step="0.1" oninput="updateExtraArea(${id}, 'width', this.value)">
+                <input type="number" placeholder="进深 (米)" step="0.1" oninput="updateExtraArea(${id}, 'depth', this.value)">
+                <div style="min-width: 80px; text-align: center;">
+                    <span id="extra-area-${id}">0.00</span> m²
+                </div>
+                <button class="remove-extra-btn" onclick="removeExtraArea(${id})">删除</button>
+            `;
+            container.appendChild(extraItem);
+            
+            calculateAreas();
+        }
+        
+        // 更新额外面积描述
+        function updateExtraDescription(id, description) {
+            const area = extraAreas.find(a => a.id === id);
+            if (area) {
+                area.description = description;
+            }
+        }
+        
+        // 更新额外面积尺寸
+        function updateExtraArea(id, dimension, value) {
+            const area = extraAreas.find(a => a.id === id);
+            if (area) {
+                area[dimension] = parseFloat(value) || 0;
+                area.area = (area.width * area.depth).toFixed(2);
+                document.getElementById(`extra-area-${id}`).textContent = area.area;
+                calculateAreas();
+            }
+        }
+        
+        // 删除额外面积项目
+        function removeExtraArea(id) {
+            extraAreas = extraAreas.filter(a => a.id !== id);
+            const element = document.querySelector(`[onclick="removeExtraArea(${id})"]`).parentNode;
+            element.parentNode.removeChild(element);
+            calculateAreas();
+        }
+        
+        // 计算所有面积
         function calculateAreas() {
             // 获取各楼层尺寸
             const floor1Width = parseFloat(document.getElementById('floor1-width').value) || 0;
@@ -292,37 +373,77 @@
             const floor2Depth = parseFloat(document.getElementById('floor2-depth').value) || 0;
             const floor3Width = parseFloat(document.getElementById('floor3-width').value) || 0;
             const floor3Depth = parseFloat(document.getElementById('floor3-depth').value) || 0;
-
+            
             // 计算各楼层面积
             const floor1Area = (floor1Width * floor1Depth).toFixed(2);
             const floor2Area = (floor2Width * floor2Depth).toFixed(2);
             const floor3Area = (floor3Width * floor3Depth).toFixed(2);
-
+            
+            // 计算额外面积总和
+            let extraTotalArea = 0;
+            extraAreas.forEach(area => {
+                extraTotalArea += parseFloat(area.area) || 0;
+            });
+            
             // 计算总面积
-            const totalArea = (parseFloat(floor1Area) + parseFloat(floor2Area) + parseFloat(floor3Area)).toFixed(2);
-
+            const totalArea = (parseFloat(floor1Area) + parseFloat(floor2Area) + parseFloat(floor3Area) + extraTotalArea).toFixed(2);
+            
             // 更新页面显示
             document.getElementById('floor1-area').textContent = floor1Area;
             document.getElementById('floor2-area').textContent = floor2Area;
             document.getElementById('floor3-area').textContent = floor3Area;
-
+            
             document.getElementById('result-floor1').textContent = floor1Area + ' 平方米';
             document.getElementById('result-floor2').textContent = floor2Area + ' 平方米';
             document.getElementById('result-floor3').textContent = floor3Area + ' 平方米';
-
+            document.getElementById('result-extra').textContent = extraTotalArea.toFixed(2) + ' 平方米';
+            
             document.getElementById('total-area').textContent = totalArea;
-
+            
             // 更新计算过程
-            document.querySelectorAll('.process-step')[0].textContent =
-                `一楼面积 = 面宽 × 进深 = ${floor1Width} × ${floor1Depth} = ${floor1Area} 平方米`;
-            document.querySelectorAll('.process-step')[1].textContent =
-                `二楼面积 = 面宽 × 进深 = ${floor2Width} × ${floor2Depth} = ${floor2Area} 平方米`;
-            document.querySelectorAll('.process-step')[2].textContent =
-                `三楼面积 = 面宽 × 进深 = ${floor3Width} × ${floor3Depth} = ${floor3Area} 平方米`;
-            document.querySelectorAll('.process-step')[3].textContent =
-                `总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 = ${floor1Area} + ${floor2Area} + ${floor3Area} = ${totalArea} 平方米`;
+            updateCalculationProcess(floor1Width, floor1Depth, floor1Area, 
+                                   floor2Width, floor2Depth, floor2Area,
+                                   floor3Width, floor3Depth, floor3Area,
+                                   extraTotalArea, totalArea);
         }
+        
+        // 更新计算过程显示
+        function updateCalculationProcess(f1w, f1d, f1a, f2w, f2d, f2a, f3w, f3d, f3a, extra, total) {
+            const processElement = document.querySelector('.calculation-process');
+            let processHTML = `
+                <h2>计算过程</h2>
+                <div class="process-step">一楼面积 = 面宽 × 进深 = ${f1w} × ${f1d} = ${f1a} 平方米</div>
+                <div class="process-step">二楼面积 = 面宽 × 进深 = ${f2w} × ${f2d} = ${f2a} 平方米</div>
+                <div class="process-step">三楼面积 = 面宽 × 进深 = ${f3w} × ${f3d} = ${f3a} 平方米</div>
+            `;
+            
+            // 添加额外面积的计算过程
+            if (extra > 0) {
+                let extraDetails = '';
+                extraAreas.forEach(area => {
+                    if (area.area > 0) {
+                        const desc = area.description ? `（${area.description}）` : '';
+                        extraDetails += `${area.width} × ${area.depth}${desc} + `;
+                    }
+                });
+                if (extraDetails) {
+                    extraDetails = extraDetails.slice(0, -3); // 移除最后的 " + "
+                    processHTML += `<div class="process-step">额外面积 = ${extraDetails} = ${extra.toFixed(2)} 平方米</div>`;
+                }
+            } else {
+                processHTML += `<div class="process-step">额外面积 = 0.00 平方米</div>`;
+            }
+            
+            processHTML += `
+                <div class="process-step">总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 + 额外面积 = 
+                ${f1a} + ${f2a} + ${f3a} + ${extra.toFixed(2)} = ${total} 平方米</div>
+            `;
+            
+            processElement.innerHTML = processHTML;
+        }
+        
+        // 初始化计算
+        window.onload = calculateAreas;
     </script>
 </body>
-
 </html>
