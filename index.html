@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑面积计算器</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+        }
+        header {
+            background: #4a6bdf;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .building-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .floor-card {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .floor-title {
+            color: #4a6bdf;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .area-display {
+            background: #e8f4ff;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .results {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .total-area {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6bdf;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f4ff;
+            border-radius: 10px;
+        }
+        .calculation-process {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .process-step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .process-step:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4a6bdf;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eaeaea;
+        }
+        @media (max-width: 768px) {
+            .building-input {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>建筑面积计算器</h1>
+            <div class="subtitle">快速计算各楼层面积与总面积</div>
+        </header>
+        
+        <div class="content">
+            <div class="building-input">
+                <div class="floor-card">
+                    <div class="floor-title">
+                        <span>一楼</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="floor1-width">面宽 (米)</label>
+                        <input type="number" id="floor1-width" value="12.4" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="floor1-depth">进深 (米)</label>
+                        <input type="number" id="floor1-depth" value="13.0" step="0.1">
+                    </div>
+                    <div class="area-display">
+                        面积: <span id="floor1-area">161.20</span> 平方米
+                    </div>
+                </div>
+                
+                <div class="floor-card">
+                    <div class="floor-title">
+                        <span>二楼</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="floor2-width">面宽 (米)</label>
+                        <input type="number" id="floor2-width" value="12.4" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="floor2-depth">进深 (米)</label>
+                        <input type="number" id="floor2-depth" value="9.5" step="0.1">
+                    </div>
+                    <div class="area-display">
+                        面积: <span id="floor2-area">117.80</span> 平方米
+                    </div>
+                </div>
+                
+                <div class="floor-card">
+                    <div class="floor-title">
+                        <span>三楼</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="floor3-width">面宽 (米)</label>
+                        <input type="number" id="floor3-width" value="12.4" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="floor3-depth">进深 (米)</label>
+                        <input type="number" id="floor3-depth" value="9.5" step="0.1">
+                    </div>
+                    <div class="area-display">
+                        面积: <span id="floor3-area">117.80</span> 平方米
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results">
+                <h2>计算结果</h2>
+                <div class="result-item">
+                    <span>一楼面积:</span>
+                    <span id="result-floor1">161.20 平方米</span>
+                </div>
+                <div class="result-item">
+                    <span>二楼面积:</span>
+                    <span id="result-floor2">117.80 平方米</span>
+                </div>
+                <div class="result-item">
+                    <span>三楼面积:</span>
+                    <span id="result-floor3">117.80 平方米</span>
+                </div>
+                
+                <div class="total-area">
+                    总建筑面积: <span id="total-area">396.80</span> 平方米
+                </div>
+            </div>
+            
+            <div class="calculation-process">
+                <h2>计算过程</h2>
+                <div class="process-step">一楼面积 = 面宽 × 进深 = 12.4 × 13.0 = 161.20 平方米</div>
+                <div class="process-step">二楼面积 = 面宽 × 进深 = 12.4 × 9.5 = 117.80 平方米</div>
+                <div class="process-step">三楼面积 = 面宽 × 进深 = 12.4 × 9.5 = 117.80 平方米</div>
+                <div class="process-step">总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 = 161.20 + 117.80 + 117.80 = 396.80 平方米</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>建筑面积计算器 &copy; 2025 | 精确计算建筑各层面积</p>
+        </footer>
+    </div>
+
+    <script>
+        // 获取所有输入元素
+        const inputs = document.querySelectorAll('input');
+        
+        // 为所有输入框添加事件监听
+        inputs.forEach(input => {
+            input.addEventListener('input', calculateAreas);
+        });
+        
+        // 初始计算
+        calculateAreas();
+        
+        // 计算面积函数
+        function calculateAreas() {
+            // 获取各楼层尺寸
+            const floor1Width = parseFloat(document.getElementById('floor1-width').value) || 0;
+            const floor1Depth = parseFloat(document.getElementById('floor1-depth').value) || 0;
+            const floor2Width = parseFloat(document.getElementById('floor2-width').value) || 0;
+            const floor2Depth = parseFloat(document.getElementById('floor2-depth').value) || 0;
+            const floor3Width = parseFloat(document.getElementById('floor3-width').value) || 0;
+            const floor3Depth = parseFloat(document.getElementById('floor3-depth').value) || 0;
+            
+            // 计算各楼层面积
+            const floor1Area = (floor1Width * floor1Depth).toFixed(2);
+            const floor2Area = (floor2Width * floor2Depth).toFixed(2);
+            const floor3Area = (floor3Width * floor3Depth).toFixed(2);
+            
+            // 计算总面积
+            const totalArea = (parseFloat(floor1Area) + parseFloat(floor2Area) + parseFloat(floor3Area)).toFixed(2);
+            
+            // 更新页面显示
+            document.getElementById('floor1-area').textContent = floor1Area;
+            document.getElementById('floor2-area').textContent = floor2Area;
+            document.getElementById('floor3-area').textContent = floor3Area;
+            
+            document.getElementById('result-floor1').textContent = floor1Area + ' 平方米';
+            document.getElementById('result-floor2').textContent = floor2Area + ' 平方米';
+            document.getElementById('result-floor3').textContent = floor3Area + ' 平方米';
+            
+            document.getElementById('total-area').textContent = totalArea;
+            
+            // 更新计算过程
+            document.querySelectorAll('.process-step')[0].textContent = 
+                `一楼面积 = 面宽 × 进深 = ${floor1Width} × ${floor1Depth} = ${floor1Area} 平方米`;
+            document.querySelectorAll('.process-step')[1].textContent = 
+                `二楼面积 = 面宽 × 进深 = ${floor2Width} × ${floor2Depth} = ${floor2Area} 平方米`;
+            document.querySelectorAll('.process-step')[2].textContent = 
+                `三楼面积 = 面宽 × 进深 = ${floor3Width} × ${floor3Depth} = ${floor3Area} 平方米`;
+            document.querySelectorAll('.process-step')[3].textContent = 
+                `总建筑面积 = 一楼面积 + 二楼面积 + 三楼面积 = ${floor1Area} + ${floor2Area} + ${floor3Area} = ${totalArea} 平方米`;
+        }
+    </script>
+</body>
+</html>
